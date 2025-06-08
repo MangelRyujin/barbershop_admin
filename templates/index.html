@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load user_tags %} 
-{% block title %} Administración{% endblock %}
+{% block title %} Principal{% endblock %}
 {% block contend %}
 {% if request.user|has_group:"administrador"%}
 <div class="row align-items-md-stretch mt-2">

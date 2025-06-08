@@ -74,7 +74,8 @@ TEMPLATES = [
             ],
             'libraries': {
                 'user_tags': 'apps.accounts.templatetags.user_tags',
-                'url_absolute': 'apps.accounts.templatetags.custom_tags'
+                'url_absolute': 'apps.accounts.templatetags.custom_tags',
+                'float_str': 'apps.accounts.templatetags.custom_tags'
             },
         },
     },
