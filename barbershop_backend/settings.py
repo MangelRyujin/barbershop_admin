@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     # LOCAL APPS
     'apps.accounts',
     'apps.haircuts',
-    'apps.workers'
+    'apps.workers',
+    'apps.general'
 ]
 
 MIDDLEWARE = [
@@ -71,6 +72,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries': {
+                'user_tags': 'apps.accounts.templatetags.user_tags',
+                'url_absolute': 'apps.accounts.templatetags.custom_tags'
+            },
         },
     },
 ]
