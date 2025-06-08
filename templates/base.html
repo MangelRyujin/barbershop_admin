@@ -261,7 +261,7 @@
             </li>
             
             <li class="mt-1">
-              <a href="{% url 'haircut' %}" class="nav-link fs-6 text-white btn  btn-outline-danger text-start {% if request.path == '/haircuts/'%} active {% endif %}" >
+              <a href="{% url 'haircut' %}" class="nav-link fs-6 text-white btn  btn-outline-danger text-start {% if request.path == '/haircuts/'%} active bg-danger{% endif %}" >
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="me-2 bi-scissors" viewBox="0 0 16 16">
                   <path d="M3.5 3.5c-.614-.884-.074-1.962.858-2.5L8 7.226 11.642 1c.932.538 1.472 1.616.858 2.5L8.81 8.61l1.556 2.661a2.5 2.5 0 1 1-.794.637L8 9.73l-1.572 2.177a2.5 2.5 0 1 1-.794-.637L7.19 8.61zm2.5 10a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0m7 0a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0"/>
                 </svg>
@@ -269,7 +269,7 @@
               </a>
             </li>
             <li class="mt-1">
-              <a href="{% url 'dashboard' %}" class="nav-link text-white btn btn-outline-danger text-start {% if request.path == '/admin_panel/'%} active {% endif %}" >
+              <a href="{% url 'dashboard' %}" class="nav-link text-white btn btn-outline-danger text-start {% if request.path == '/admin_panel/'%} active bg-danger{% endif %}" >
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="me-2 bi-images" viewBox="0 0 16 16">
                   <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
                   <path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2M14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1M2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1z"/>
@@ -278,7 +278,7 @@
               </a>
             </li>
             <li class="mt-1">
-              <a href="{% url 'dashboard' %}" class="nav-link text-white btn btn-outline-danger text-start {% if request.path == '/admin_panel/'%} active {% endif %}" >
+              <a href="{% url 'dashboard' %}" class="nav-link text-white btn btn-outline-danger text-start {% if request.path == '/admin_panel/'%} active bg-danger{% endif %}" >
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="me-2 bi-person-circle" viewBox="0 0 16 16">
                   <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
                   <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
@@ -287,7 +287,7 @@
               </a>
             </li>
             <li class="mt-1">
-              <a href="{% url 'dashboard' %}" class="nav-link text-white btn btn-outline-danger text-start {% if request.path == '/admin_panel/'%} active {% endif %}" >
+              <a href="{% url 'dashboard' %}" class="nav-link text-white btn btn-outline-danger text-start {% if request.path == '/admin_panel/'%} active bg-danger{% endif %}" >
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="me-2 bi-list-check" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0m0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0m0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0"/>
                 </svg>
@@ -308,7 +308,7 @@
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ps-3 ">
                   {% if request.user|has_group:"administrador"%}
                   <li class="mt-1">
-                    <a href="" class="nav-link text-white btn btn-outline-danger text-start {% if request.path == '/admin_panel/reports_sales/'%} active {% endif %}">
+                    <a href="" class="nav-link text-white btn btn-outline-danger text-start {% if request.path == '/admin_panel/reports_sales/'%} active bg-danger {% endif %}">
                       
                       <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="me-2 bi-bar-chart-line-fill" viewBox="0 0 16 16">
                         <path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1z"/>
@@ -318,7 +318,7 @@
                   </li>
                   {% endif %}
                   <li class="mt-1">
-                    <a href="" class="nav-link text-white btn btn-outline-danger text-start {% if request.path == '/admin_panel/reports_user_sales/'%} active {% endif %}">
+                    <a href="" class="nav-link text-white btn btn-outline-danger text-start {% if request.path == '/admin_panel/reports_user_sales/'%} active bg-danger {% endif %}">
                       
                       <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="me-2 bi-graph-up" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M0 0h1v15h15v1H0zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07"/>
