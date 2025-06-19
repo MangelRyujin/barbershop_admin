@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'apps.accounts',
     'apps.haircuts',
     'apps.workers',
-    'apps.general'
+    'apps.general',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
