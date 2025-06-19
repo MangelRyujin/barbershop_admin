@@ -3,6 +3,7 @@ from apps.general.views.general_views import dashboard
 
 urlpatterns = [
     path('',dashboard,name='dashboard'),
-    path('haircuts/',include('apps.haircuts.urls.haircut_urls'))
+    path('haircuts/',include('apps.haircuts.urls.haircut_urls')),
+    path('gallery/',include('apps.haircuts.urls.gallery_urls')),
 ]
 

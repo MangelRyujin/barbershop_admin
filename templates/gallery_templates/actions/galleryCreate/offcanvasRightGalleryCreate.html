@@ -1,0 +1,174 @@
+<!-- Offcanvas gallery Create -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRightGalleryCreate" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasRightLabel">Crear categoría</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body" >
+      
+      
+        {% if create_form %}
+        <form 
+                enctype="multipart/form-data"
+                hx-post="{% url 'gallery_create' %}"
+                hx-target="#GalleryCreateForm"
+                hx-swap="innerHTML"
+                hx-trigger="submit"
+                hx-indicator="#spinnerGalleryCreate">
+                {% csrf_token %}
+                
+                <div class="col-12  mt-4">
+          
+                      <input type="file" name="image" required class="form-control d-none" id="id_image" accept="image/*">
+                    
+                 
+                  {% if create_form.image.errors %}
+                  <div class="alert alert-danger mt-2">
+                      {% for error in create_form.image.errors %}
+                          {{ error }}
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+                <label class="btn btn-danger" for="id_image">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-images me-2" viewBox="0 0 16 16">
+                      <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"></path>
+                      <path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2M14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1M2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1z"></path>
+                    </svg>
+                    Cargar imagen
+                  </label>
+                <div class="row mt-3">
+                  <div class="col-12">
+                      <div class="img-container bg-body-tertiary rounded border-2 border" style="max-height: 400px;min-height: 400px">
+                          <img id="imagePreview" src="#" alt="Previsualización" style="display: none; max-width: 100%;">
+                      </div>
+                  </div>
+                
+                </div>
+                <input type="hidden" id="croppedImageData" name="cropped_image">
+
+          <div id="GalleryCreateForm">
+          </div>
+                
+                <small class=" w-100 d-flex justify-content-end mt-3 gap-2">
+                  <button type="button" id="clearImageBtn" class="btn btn-danger">
+                <i class="bi bi-trash"></i> Limpiar
+            </button>
+                  <button type="submit" class="btn d-flex justify-content-center align-items-center btn-outline-success shadow-sm border-2 border-success px-5">
+                    <span id="spinnerGalleryCreate" class="htmx-indicator spinner-border spinner-border-sm me-2" ></span>Crear</button>
+              </small>
+        </form>
+
+
+
+      {% endif %}
+
+
+    
+
+      
+      
+      
+    </div>
+
+
+
+     <script>
+document.addEventListener('DOMContentLoaded', function() {
+    let cropper;
+    const imageInput = document.getElementById('id_image');
+    const imagePreview = document.getElementById('imagePreview');
+    const croppedImageData = document.getElementById('croppedImageData');
+    const form = document.querySelector('form');
+    
+    // Dimensiones deseadas
+    const TARGET_WIDTH = 736;
+    const TARGET_HEIGHT = 920;
+    const ASPECT_RATIO = TARGET_WIDTH / TARGET_HEIGHT;
+    
+    imageInput.addEventListener('change', function(e) {
+        const files = e.target.files;
+        if (files && files.length > 0) {
+            const file = files[0];
+            const reader = new FileReader();
+            
+            reader.onload = function(event) {
+                imagePreview.src = event.target.result;
+                imagePreview.style.display = 'block';
+                
+                if (cropper) {
+                    cropper.destroy();
+                }
+                
+                // Inicializar Cropper.js con configuración específica
+                cropper = new Cropper(imagePreview, {
+                    aspectRatio: ASPECT_RATIO, // Proporción fija 736:920
+                    viewMode: 3, // Vista estricta (no permite salirse de la imagen)
+                    autoCropArea: 1, // Área de recorte inicial al máximo posible
+                    responsive: true,
+                    movable: false, // No permite mover la imagen
+                    scalable: false, // No permite escalar la imagen
+                    zoomable: false, // No permite zoom
+                    rotatable: true, // Permite rotación
+                    cropBoxMovable: true, // Permite mover el cuadro de recorte
+                    cropBoxResizable: true, // No permite redimensionar el cuadro
+
+                    preview: document.querySelector('.preview-container'),
+                    ready: function() {
+                        // Forzar el tamaño exacto del cuadro de recorte
+                        this.cropper.setCropBoxData({
+                            width: TARGET_WIDTH,
+                            height: TARGET_HEIGHT
+                        });
+                        
+                        // Generar primera versión recortada
+                        updateCroppedImage();
+                    },
+                    crop: function() {
+                        // Actualizar durante el movimiento del cuadro
+                        updateCroppedImage();
+                    }
+                });
+                
+                // Rotar izquierda
+                document.getElementById('rotateLeft').addEventListener('click', function() {
+                    cropper.rotate(-90);
+                });
+                
+                // Rotar derecha
+                document.getElementById('rotateRight').addEventListener('click', function() {
+                    cropper.rotate(90);
+                });
+            };
+            
+            reader.readAsDataURL(file);
+        }
+    });
+    
+    // Función para actualizar la imagen recortada
+    function updateCroppedImage() {
+        if (cropper) {
+            const canvas = cropper.getCroppedCanvas({
+                width: TARGET_WIDTH,
+                height: TARGET_HEIGHT,
+                fillColor: '#fff',
+                imageSmoothingEnabled: true,
+                imageSmoothingQuality: 'high',
+            });
+            
+            if (canvas) {
+                croppedImageData.value = canvas.toDataURL('image/jpeg');
+            }
+        }
+    }
+    
+    // Actualizar antes de enviar el formulario
+    form.addEventListener('submit', function(e) {
+        updateCroppedImage();
+    });
+});
+</script>
+
+</div>
+  <!-- End Offcanvas gallery Create -->
+  

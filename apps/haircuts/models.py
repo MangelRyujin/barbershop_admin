@@ -1,5 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator
+from imagekit.models import ProcessedImageField
+from imagekit.processors import ResizeToFill, Adjust, SmartResize,ResizeToFit
 
 # Create your models here.
 class HairCut(models.Model):
@@ -16,7 +18,9 @@ class HairCut(models.Model):
 
 class Gallery(models.Model):
     name = models.CharField("Name",max_length=255)
-    image = models.ImageField(upload_to="gallery")
+    image = ProcessedImageField(upload_to='gallery',
+                                           format='WEBP',
+                                           options={'quality': 85})
 
     class Meta:
         verbose_name = "Gallería"

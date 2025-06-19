@@ -32,7 +32,7 @@
                           
                           hx-post="{% url 'haircut_delete' pk=haircut.id  %} "
                           hx-target="#haircut-{{haircut.pk}}"
-                          hx-swap="outherHTML"
+                          hx-swap="outerHTML"
                           hx-trigger="click"
                           hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'
                           >
